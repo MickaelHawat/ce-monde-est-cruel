@@ -15,42 +15,42 @@ class RuusanPlayer extends Player
     protected $opponentSide;
     protected $result;
 
-    $a = 22;
-    $b = 7;
-    $c = ($a / $b);
-    $n = 1;
-    $f = 1;
-    $k = $this->result->getNbRound();
+    public $a = 22;
+    public $b = 7;
+    public $n = 1;
+    public $f = 1;
 
     public function getChoice()
     {
+        $c = ($this->a / $this->b);
+        $k = $this->result->getNbRound();
         if($k == 0)
         {
-            $n = $n*10;
-            $f = $f + 1;
+            $this->n = $this->n*10;
+            $this->f = $this->f + 1;
             return parent::paperChoice();
         }
-        if($f > 10)
+        if($this->f > 10)
         {
-            $a = $a + 3;
-            $c = $a / $b;
-            $f = 1;
-            $n = 1;
+            $this->a = $this->a + 3;
+            $c = $this->a / $this->b;
+            $this->f = 1;
+            $this->n = 1;
         }
-        if (($c*$n)%10 > 6)
+        if (($c*$this->n)%10 > 6)
         {
-            $n = $n*10;
-            $f = $f + 1;
+            $this->n = $this->n*10;
+            $this->f = $this->f + 1;
             if ($this->result->getLastChoiceFor($this->mySide) == parent::rockChoice())
             {
                 return parent::scissorsChoice();
             }
             return parent::rockChoice();
         }
-        elseif (($c*$n)%10 > 3)
+        elseif (($c*$this->n)%10 > 3)
         {
-            $n = $n*10;
-            $f = $f + 1;
+            $this->n = $this->n*10;
+            $this->f = $this->f + 1;
             if ($this->result->getLastChoiceFor($this->mySide) == parent::paperChoice())
             {
                 return parent::rockChoice();
@@ -59,8 +59,8 @@ class RuusanPlayer extends Player
         }
         else
         {
-            $n = $n*10;
-            $f = $f + 1;
+            $this->n = $this->n*10;
+            $this->f = $this->f + 1;
             if ($this->result->getLastChoiceFor($this->mySide) == parent::scissorsChoice())
             {
                 return parent::paperChoice();
