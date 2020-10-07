@@ -24,50 +24,48 @@ class RuusanPlayer extends Player
 
     public function getChoice()
     {
-        
-        for ($i = 0; $i <= $k; $i++)
+        if($k == 0)
         {
-            if($i == 0)
-            {
-                return parent::paperChoice();
-            }
-            if($f > 10)
-            {
+            $n = $n*10;
+            $f = $f + 1;
+            return parent::paperChoice();
+        }
+        if($f > 10)
+        {
             $a = $a + 3;
             $c = $a / $b;
             $f = 1;
             $n = 1;
-            }
-            if (($c*$n)%10 > 6)
+        }
+        if (($c*$n)%10 > 6)
+        {
+            $n = $n*10;
+            $f = $f + 1;
+            if ($this->result->getLastChoiceFor($this->mySide) == parent::rockChoice())
             {
-                $n = $n*10;
-                $f = $f + 1;
-                if ($this->result->getLastChoiceFor($this->mySide) == parent::rockChoice())
-                {
-                    return parent::scissorsChoice();
-                }
-                return parent::rockChoice();
-            }
-            elseif (($c*$n)%10 > 3)
-            {
-                $n = $n*10;
-                $f = $f + 1;
-                if ($this->result->getLastChoiceFor($this->mySide) == parent::paperChoice())
-                {
-                    return parent::rockChoice();
-                }
-                return parent::paperChoice();
-            }
-            else
-            {
-                $n = $n*10;
-                $f = $f + 1;
-                if ($this->result->getLastChoiceFor($this->mySide) == parent::scissorsChoice())
-                {
-                    return parent::paperChoice();
-                }
                 return parent::scissorsChoice();
             }
+            return parent::rockChoice();
+        }
+        elseif (($c*$n)%10 > 3)
+        {
+            $n = $n*10;
+            $f = $f + 1;
+            if ($this->result->getLastChoiceFor($this->mySide) == parent::paperChoice())
+            {
+                return parent::rockChoice();
+            }
+            return parent::paperChoice();
+        }
+        else
+        {
+            $n = $n*10;
+            $f = $f + 1;
+            if ($this->result->getLastChoiceFor($this->mySide) == parent::scissorsChoice())
+            {
+                return parent::paperChoice();
+            }
+            return parent::scissorsChoice();
         }
 
     }
